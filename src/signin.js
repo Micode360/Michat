@@ -1,18 +1,9 @@
 import { useReducer } from "react"
 import { Form, Button } from "react-bootstrap"
+import  authReducer  from "./store/reducer/authReducer"
 
 
 
-const authReducer = (state, action) => {
-
-    switch(action.type){
-        case 'REGISTER_USER': 
-        console.log(state, 'reducer');
-        return [...action.state];
-        default:
-            return state;
-    }
-}
 
 
 
