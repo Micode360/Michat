@@ -30,12 +30,7 @@ const SignIn = () => {
         <>
             <Form
                 onSubmit={submitMachine}
-                style={{
-                    width:'30%',
-                    border:'1px solid #3333',
-                    borderRadius: '6px',
-                    padding: '20px 15px'
-                }}
+                className = 'auth-form'
             >
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
