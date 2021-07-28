@@ -17,7 +17,7 @@ const SignIn = () => {
         const [email, password] = e.target.elements;
 
         dispatch({type: 'REGISTER_USER', state: [...state, { email: email.value, password: password.value}]})
-        
+
         history.push('/')
     }
     return (
@@ -26,6 +26,10 @@ const SignIn = () => {
                 onSubmit={submitMachine}
                 className = 'auth-form'
             >
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label><h3>Sign In</h3></Form.Label>
+                </Form.Group>
+                
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control type="email" placeholder="Enter email" />

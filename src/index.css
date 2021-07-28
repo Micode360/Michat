@@ -23,3 +23,17 @@ code {
   left: 50%;
   transform: translate(-50%,-50%);
 }
+
+
+.contain-a {
+    display:flex !important;
+    position: relative;
+    padding: 15px 30px;
+    border-bottom: 1px solid #3333;
+}
+
+
+.contain-a button {
+  position:absolute;
+  right: 30px;
+}
