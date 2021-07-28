@@ -1,13 +1,26 @@
-import { BrowserRouter as Router, Switch, Route} from "react-router-dom"
+import { useEffect } from "react"
+import { Switch, Route, useHistory} from "react-router-dom"
 import SignIn from "./signin" 
+import Home from "./components/Home"
 
 const App = () => {
+      let history = useHistory();
+      
+      useEffect(() =>{
+            let userStr = localStorage.getItem('payload');
+            let userObj = JSON.parse(userStr);
+            if(!userObj) {
+                  history.push('/signIn')
+            }else history.push('/',{
+                  email: userObj.email
+            })
+      })
+  
   return (
-      <Router>
             <Switch>
                   <Route exact path="/signIn" component={SignIn}/>
+                  <Route path="/" component={Home}/>
             </Switch>
-      </Router>
   );
 }
 

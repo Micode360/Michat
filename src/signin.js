@@ -5,9 +5,11 @@ import  authReducer  from "./store/reducer/authReducer"
 
 
 
+import { useHistory } from 'react-router-dom'
 
 
 const SignIn = () => {
+    const history = useHistory();
     const [state, dispatch] = useReducer(authReducer, []);
 
     const submitMachine = (e) => {
@@ -15,7 +17,8 @@ const SignIn = () => {
         const [email, password] = e.target.elements;
 
         dispatch({type: 'REGISTER_USER', state: [...state, { email: email.value, password: password.value}]})
-
+        
+        history.push('/')
     }
     return (
         <>

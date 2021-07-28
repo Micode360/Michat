@@ -3,10 +3,14 @@
 
 
 
-const Home = () => {
+const Home = (props) => {
+
+  
     return (
         <div>
-            Hello
+                Hello
         </div>
     )
 }
+
+export default Home
