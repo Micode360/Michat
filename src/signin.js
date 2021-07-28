@@ -1,4 +1,5 @@
 import { useReducer } from "react"
+import { Link } from "react-router-dom"
 import { Form, Button } from "react-bootstrap"
 import  authReducer  from "./store/reducer/authReducer"
 
@@ -17,29 +18,61 @@ const SignIn = () => {
         const [email, password] = e.target.elements;
 
         dispatch({type: 'REGISTER_USER', state: [...state, { email: email.value, password: password.value}]})
-        
+
         history.push('/')
     }
     return (
         <>
-            <Form
-                onSubmit={submitMachine}
-                className = 'auth-form'
-            >
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
+            <div className="sign-mn-cont">
 
-                </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
+            <div className="sign-child-cont sn-1 p-2">
+                    <div className="text-center">
+                    <i class="fas fa-map-marker-alt"></i>
+                        <p>
+                            Join us, let's explore the world together.
+                        </p>
+                    </div>
+                </div>
+
+                <div className="sign-child-cont sn-2 p-2">
+                <Form
+                    onSubmit={submitMachine}
+                    className = 'auth-form'
+                >
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label><h3>Sign In</h3></Form.Label>
+                    </Form.Group>
+                    
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control className="sn-input" type="email" placeholder="Enter email" />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control className="sn-input" type="password" placeholder="Password" />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Text className="text-muted">
+                       <Link to="/Sign Up">Forgot password</Link>
+                    </Form.Text>
+                    </Form.Group>
+
+                    <Button className="sn-btn" variant="primary" type="submit">
+                        Submit
+                    </Button>
+
+                    <Form.Group className="mb-3 mt-3" controlId="formBasicPassword">
+                    <Form.Text className="text-white">
+                        Don't have an account? <Link to="/Sign Up">Sign Up</Link>
+                    </Form.Text>
+                    </Form.Group>
+                </Form>
+                </div>
+             
+            </div>
         </>
     )
 }
