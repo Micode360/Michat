@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { Switch, Route, useHistory} from "react-router-dom"
 import SignIn from "./signin" 
+import SignUp from "./signup" 
 import Home from "./components/Home"
 
 
@@ -20,6 +21,7 @@ const App = () => {
   return (
             <Switch>
                   <Route exact path="/signIn" component={SignIn}/>
+                  <Route path="/signUp" component={SignUp}/>
                   <Route path="/" component={Home}/>
             </Switch>
   );

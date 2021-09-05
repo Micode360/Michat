@@ -2,14 +2,10 @@ import { useReducer, useState } from "react"
 import { Link } from "react-router-dom"
 import { Form, Button } from "react-bootstrap"
 import  authReducer  from "./store/reducer/authReducer"
-
-
-
-
 import { useHistory } from 'react-router-dom'
 
 
-const SignIn = () => {
+const SignUp = () => {
     const history = useHistory();
     const [state, dispatch] = useReducer(authReducer, []);
     const [emailError, setEmailError] = useState("");
@@ -30,13 +26,20 @@ const SignIn = () => {
             history.push('/')
         }
 
-
     }
     return (
         <>
             <div className="sign-mn-cont">
 
 
+            <div className="sign-child-cont sn-1 p-2">
+                    <div className="text-center">
+                    <i className="fas fa-map-marker-alt"></i>
+                        <p>
+                            Join us, let's explore the world together.
+                        </p>
+                    </div>
+                </div>
 
                 <div className="sign-child-cont sn-2 p-2">
                 <Form
@@ -44,7 +47,7 @@ const SignIn = () => {
                     className = 'auth-form'
                 >
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label><h3>Sign In</h3></Form.Label>
+                        <Form.Label><h3>Sign Up</h3></Form.Label>
                     </Form.Group>
                     
                     <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -55,8 +58,6 @@ const SignIn = () => {
                         </Form.Text>
                     </Form.Group>
 
-                
-
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
                         <Form.Control className="sn-input" type="password" placeholder="Password" />
@@ -66,9 +67,6 @@ const SignIn = () => {
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Text className="text-muted">
-                       <Link to="/Sign Up">Forgot password</Link>
-                    </Form.Text>
                     </Form.Group>
 
                     <Button className="sn-btn" variant="primary" type="submit">
@@ -77,26 +75,10 @@ const SignIn = () => {
 
                     <Form.Group className="mb-3 mt-3" controlId="formBasicPassword">
                     <Form.Text className="text-white">
-                        Don't have an account? <Link to="/SignUp">Sign Up</Link>
+                        Have have an account? <Link to="/SignIn">Sign In</Link>
                     </Form.Text>
                     </Form.Group>
                 </Form>
-                </div>
-
-
-
-
-                <div className="sign-child-cont sn-1 p-2">
-                    <div className="text-center">
-                    <i className="fas fa-map-marker-alt"></i>
-                        <p>
-                        What are you Waiting for, sign in.
-                        </p>
-                    </div>
-
-                    <span className="py-circle">
-                            <i className="fas fa-play"></i>
-                    </span>
                 </div>
              
             </div>
@@ -105,4 +87,4 @@ const SignIn = () => {
 }
 
 
-export default SignIn
+export default SignUp
