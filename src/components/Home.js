@@ -10,7 +10,9 @@ const Home = () => {
     let history = useHistory();
     const [user, setUser] = useState({});
 
+
     useEffect(() => {
+        if(loadUser() === undefined) return;
         setUser({
             email: loadUser().email
         });
@@ -21,7 +23,6 @@ const Home = () => {
          localStorage.removeItem('payload');
         return history.push('/signIn');
     }
-
   
     
     return (
