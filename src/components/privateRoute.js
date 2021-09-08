@@ -1,18 +1,15 @@
-
-import { Route, useHistory, Redirect} from "react-router-dom"
-
+import { Route, Redirect, Switch } from "react-router-dom"
+import  Home  from "./Home"
 
 
 const PrivateRoute = ({Component: component, path, ...rest }) => {
 
   
-
-    let history = useHistory();
       
           let userStr = localStorage.getItem('payload');
           let userObj = JSON.parse(userStr);
           if(!userObj) {
-                // history.push('/signIn')
+
 
                 return (
                     <Route
@@ -29,7 +26,9 @@ const PrivateRoute = ({Component: component, path, ...rest }) => {
                 <Route
                 render={()=>{
                         return (
-                            <Redirect to="/"/>
+                            <Switch>
+                                  <Route path="/" component={Home}/>
+                            </Switch>
                         )
                 }}
         />
@@ -37,12 +36,6 @@ const PrivateRoute = ({Component: component, path, ...rest }) => {
           }
   }
 
-
-  /*
-  history.push('/',{
-                email: userObj.email
-          })
-  */
 
 
 export default PrivateRoute; 

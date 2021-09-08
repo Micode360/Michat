@@ -59,7 +59,7 @@ const SignIn = () => {
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control className="sn-input" type="password" placeholder="Password" />
+                        <Form.Control className="sn-input" type="password" autoComplete="on" placeholder="Password" />
                         <Form.Text className="text-muted mt-2">
                             <p className="mb-0">{ passwordError }</p>
                         </Form.Text>
