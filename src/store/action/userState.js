@@ -1,10 +1,6 @@
 
 
 
-
-
-
-
 export const loadUser = () => {
     let userStr = localStorage.getItem('payload');
 
@@ -14,3 +10,5 @@ export const loadUser = () => {
         return userObj;
     }
 }
+
+

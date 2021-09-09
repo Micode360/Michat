@@ -103,6 +103,7 @@ label:focus,
   color: #ffffff !important;
   position: relative;
 }
+
 .sn-2::after {
   position: absolute;
   top: 0;
