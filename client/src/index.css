@@ -196,3 +196,17 @@ label:focus,
   }
 }
  
+
+
+
+/*Home chat Page*/
+.chat-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  position:absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-top: 8px solid red;
+}

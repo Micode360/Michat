@@ -3,11 +3,12 @@ import { Link } from "react-router-dom"
 import { Form, Button } from "react-bootstrap"
 import  authReducer  from "./store/reducer/authReducer"
 import { useHistory } from 'react-router-dom'
+import { signInAction } from './store/action/authAction'
 
 
 const SignUp = () => {
     const history = useHistory();
-    const [state, dispatch] = useReducer(authReducer, []);
+    const [state, dispatch] = useReducer(authReducer, {});
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
 
@@ -22,7 +23,7 @@ const SignUp = () => {
             setPasswordError("Fill up your password");
             return;
         }else{
-            dispatch({type: 'REGISTER_USER', state: [...state, { email: email.value, password: password.value}]})
+            dispatch(signInAction({type: 'SIGNUP_SUCCESS', state: { email: email.value, password: password.value}}))
             history.push('/')
         }
 
@@ -36,7 +37,7 @@ const SignUp = () => {
                     <div className="text-center">
                     <i className="fas fa-map-marker-alt"></i>
                         <p>
-                            Join us, let's explore the world together.
+                            Reach out to dozens of people around the globe.
                         </p>
                     </div>
                 </div>
