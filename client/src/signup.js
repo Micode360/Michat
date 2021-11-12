@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { Form, Button } from "react-bootstrap"
 import  authReducer  from "./store/reducer/authReducer"
 import { useHistory } from 'react-router-dom'
-import { signInAction } from './store/action/authAction'
+import { signUpAction } from './store/action/authAction'
 
 
 const SignUp = () => {
@@ -23,9 +23,12 @@ const SignUp = () => {
             setPasswordError("Fill up your password");
             return;
         }else{
-            dispatch(signInAction({type: 'SIGNUP_SUCCESS', state: { email: email.value, password: password.value}}))
-            history.push('/')
-        }
+                signUpAction({ email: email.value, password: password.value}, dispatch)
+ 
+                //history.push('/')
+            }
+            
+    
 
     }
     return (
@@ -53,7 +56,13 @@ const SignUp = () => {
                     
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control className="sn-input" type="email" placeholder="Enter email" />
+
+                        <Form.Control 
+                           className="sn-input" 
+                           type="email" 
+                           placeholder="Enter email" 
+                        />
+
                         <Form.Text className="text-muted mt-2">
                             <p className="mb-0">{ emailError }</p>
                         </Form.Text>
@@ -61,7 +70,13 @@ const SignUp = () => {
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control className="sn-input" type="password" placeholder="Password" />
+
+                        <Form.Control 
+                        className="sn-input" 
+                        type="password" 
+                        placeholder="Password" 
+                        />
+
                         <Form.Text className="text-muted mt-2">
                             <p className="mb-0">{ passwordError }</p>
                         </Form.Text>

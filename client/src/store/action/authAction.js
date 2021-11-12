@@ -1,31 +1,38 @@
 import axios from "axios"
 import { SIGNUP_SUCCESS } from '../types'
 import { SIGNUP_FAIL } from '../types'
+import { SIGNIN_SUCCESS } from '../types'
 
 
 
-   export const signInAction = (state) => {
-         axios.post('http://localhost:5000/auth/signUp', state.state)
+   export const signUpAction = (state, dispatch) => {
+      console.log(state)
+         axios.post('http://localhost:5000/auth/signUp', state)
          .then((data) => {
             console.log(data, 'data')
-            return { type:SIGNUP_SUCCESS, state:data.data.message }
+            return dispatch({type: SIGNUP_SUCCESS, payload: { type:SIGNUP_SUCCESS, state:data.data.message }})
          }).catch((err) => {                 
                            if (err) {
                            return{ type:SIGNUP_FAIL, payload:'error'}
                   }
          })
-         // return{ type:SIGNUP_SUCCESS, state: state}
+
    }
 
-//  export const registerationAction = (state) => {
-//    return (dispatch, getState) => {
-//             axios.post('http://localhost:5000/auth/signUp', state)
-//               .then(() => {
-//                 dispatch({ type:REGISTER_SUCCESS, payload:'Registeration success' })
-//               }).catch((err) => {                 
-//                if (err.response) {
-//                dispatch({ type:REGISTER_FAIL, payload: err.response.data })
-//            }
-//               })
-//    }
-// }
+
+
+      export const signInAction = (state) => {
+      console.log(state)
+         axios.post('http://localhost:5000/auth/signin', state)
+         .then((data) => {
+            console.log(data, 'data');
+             return { type:SIGNIN_SUCCESS, state: data }
+         }).catch((err) => {                 
+                           if (err) {
+                           return{ type:SIGNUP_FAIL, payload:'error'}
+                  }
+         })
+
+   }
+
+

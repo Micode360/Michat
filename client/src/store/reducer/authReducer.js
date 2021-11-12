@@ -13,6 +13,13 @@ const authReducer = (state, action) => {
             state: state, 
             action: action
         })
+        return state
+        case 'SIGNIN_SUCCESS': 
+        // localStorage.setItem('payload',  JSON.stringify(action.state[0]));
+        console.log({
+            state: state, 
+            action: action
+        })
         return[...state, action.state];
         case 'SIGNUP_FAIL': 
         // localStorage.setItem('payload',  JSON.stringify(action.state[0]));

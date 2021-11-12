@@ -2,6 +2,7 @@ import { useReducer, useState } from "react"
 import { Link } from "react-router-dom"
 import { Form, Button } from "react-bootstrap"
 import  authReducer  from "./store/reducer/authReducer"
+import { signInAction } from "./store/action/authAction"
 
 
 
@@ -26,8 +27,12 @@ const SignIn = () => {
             setPasswordError("Fill up your password");
             return;
         }else{
-            dispatch({type: 'REGISTER_USER', state: [...state, { email: email.value, password: password.value}]})
-            history.push('/')
+            if(
+                dispatch(signInAction({type: 'SIGNIN_SUCCESS', state: { email: email.value, password: password.value}})) && state !== {}
+            )
+            {
+                history.push('/');
+            }
         }
 
 
