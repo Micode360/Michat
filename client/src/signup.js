@@ -35,16 +35,6 @@ const SignUp = () => {
         <>
             <div className="sign-mn-cont">
 
-
-            <div className="sign-child-cont sn-1 p-2">
-                    <div className="text-center">
-                    <i className="fas fa-map-marker-alt"></i>
-                        <p>
-                            Reach out to dozens of people around the globe.
-                        </p>
-                    </div>
-                </div>
-
                 <div className="sign-child-cont sn-2 p-2">
                 <Form
                     onSubmit={submitMachine}
