@@ -4,14 +4,7 @@ body {
   margin: 0;
   font-family:'Open Sans', sans-serif, source-code-pro, Menlo, Monaco, Consolas, 'Courier New';
   background: rgb(26,29,36) !important;
-  font-family: Doris;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 
 textarea:hover, 
 input:hover, 
@@ -627,7 +620,34 @@ label:focus,
   }
 
   .c-col-3 {
-    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 20;
+    width: 20rem;
+    display:none;
   }
 
+}
+
+@media (max-width: 978px) {
+  .chat-container {
+    grid-template-columns: 1fr 12fr;
+  }
+
+    .c-col-1 {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+  .c-col-nth-2 {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+    width: 20rem;
+    display:none;
+  }
 }
