@@ -35,12 +35,8 @@ router.post('/signUp', async (req, res) => {
          newUserData.password = crypted;
          newUserData.save()
         .then((data) => {
-        //  const setToken = (id) => jwtToken.sign({ id }, jwtSecret, {expiresIn: '1d'})
-          let userId = data._id.toString();
-          // let token = setToken(userId);
-           console.log(userId, typeof(userId),'token')
-          res.cookie('user', userId, {maxAge: 3000, httpOnly: true});
-//          console.log(data._id.toString(), typeof(data._id), 'server');//you stopped here. Work from here later
+           console.log(data,'token')
+
           res.json({ message: "You have successfully registered" })
         })
         .catch(err => res.status(400).json('Reg Error' + err));

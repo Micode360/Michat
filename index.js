@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const base = require('./config/base');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 base();
 
 require('dotenv').config()
@@ -37,16 +38,12 @@ app.get('/readcookie', (req,res) => {
 });
 
 
-if(process.env.NODE_ENV  === 'production') {
+if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
-
-    app.get('/', (req, res) => {
-        res.sendFile(__dirname, + '/client/build/index.html')
-    }
-     
-    );
-
+    app.get('/*', (req, res) => res.sendFile(path.resolve(__dirname + '/client/build/index.html')));
 }
+
+
 
 
 let port = process.env.PORT || 3000;

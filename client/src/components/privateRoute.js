@@ -3,13 +3,10 @@ import  Home  from "./Home"
 
 
 const PrivateRoute = ({Component: component, path, ...rest }) => {
-
-  
       
           let userStr = localStorage.getItem('payload');
           let userObj = JSON.parse(userStr);
           if(!userObj) {
-
 
                 return (
                     <Route

@@ -1,2 +1,4 @@
 # Michat
-App on progress.
+
+# A chat application.
+# Status: Construction in progress.
