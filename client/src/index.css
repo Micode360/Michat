@@ -41,7 +41,7 @@ label:focus,
 /*Sign In*/
 .sign-mn-cont{
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
 }
 
 .sign-child-cont{
@@ -52,38 +52,6 @@ label:focus,
   height: 100vh;
 }
 
-.sn-1 {
-  background-color: #f6efef;
-  font-size: 30px;
-}
-
-.fa-map-marker-alt{
-  color: rgb(219, 45, 45);
-  text-shadow: 8px 6px 20px #695858;
-  font-size: 3.0rem;
-  margin-bottom: 20px;
-}
-
-.sn-1 {
-  background-color: #f6efef;
-  font-size: 30px;
-  position: relative;
-}
-
-.py-circle {
-  background-color: red;
-  width:70px;
-  height:70px;
-  position: absolute;
-  left: -35px;
-  border-radius: 50%;
-  display: none; /*flex*/
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
- 
-
 
 /*Sn-2*/
 .btn-primary {
@@ -91,10 +59,10 @@ label:focus,
      background-color: #ffe699 !important;
      color: #222121 !important;
      border: none !important;
+     width: 100%;
 }
 
 .sn-2 {
-  background-color: #222121;
   color: #ffffff !important;
   position: relative;
 }
@@ -111,7 +79,9 @@ label:focus,
 
 
 .sn-2 a, .form-label{
-  color: #ffe699;
+  /* color: #ffe699; */
+  color: #ffffff;
+  font-size: 0.8rem;
 }
 
 .sn-2 a:hover{
@@ -132,7 +102,7 @@ label:focus,
 }
 
 .auth-form {
-  width:60%;
+  width:28%;
   border-radius: 6px;
   padding: 20px 15px;
 }
@@ -614,6 +584,12 @@ label:focus,
   background-size: cover;
 }
 
+.col-nth-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 @media (max-width: 1292px) {
   .chat-container {
     grid-template-columns: 1fr 1.8fr;
@@ -639,7 +615,10 @@ label:focus,
     .c-col-1 {
       display: grid;
       grid-template-columns: 1fr;
+      overflow: hidden;
     }
+
+
 
   .c-col-nth-2 {
     position: absolute;
@@ -649,5 +628,46 @@ label:focus,
     z-index: 20;
     width: 20rem;
     display:none;
+  }
+
+}
+
+
+@media (max-width: 703px) {
+  .chat-container {
+    grid-template-columns: 1fr;
+  }
+
+  .c-col-1 {
+    display:none;
+  }
+
+  /* .c-col-nth-1 {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content:flex-start;
+    padding-top: 0;
+    display:none;
+  }
+
+  .col-nth-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-between;
+    width: 100%;
+  } */
+
+}
+
+
+@media (max-width: 534px) {
+  ._mi_cht {
+    max-width:60%;
+  }
+
+  ._gue_cht {
+    max-width:60%;
   }
 }

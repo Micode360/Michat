@@ -88,21 +88,6 @@ const SignIn = () => {
                 </Form>
                 </div>
 
-
-
-
-                <div className="sign-child-cont sn-1 p-2">
-                    <div className="text-center">
-                    <i className="fas fa-map-marker-alt"></i>
-                        <p>
-                        What are you Waiting for, sign in.
-                        </p>
-                    </div>
-
-                    <span className="py-circle">
-                            <i className="fas fa-play"></i>
-                    </span>
-                </div>
              
             </div>
         </>
