@@ -4,9 +4,7 @@
   "description": "A simple chat application",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "node index.js",
-    "lint": "yarn run eslint index.js"
+    "start": "node index.js"
   },
   "repository": "https://github.com/Micode360/Michat.git",
   "author": "abayemiracle@gmail.com",
