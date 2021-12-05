@@ -10,10 +10,11 @@ const App = () => {
 
   
   return (
-            <Switch>
+            <Switch>282d33
                   <Route exact path="/signIn" component={SignIn}/>
                   <Route path="/signUp" component={SignUp}/>
-                  <PrivateRoute path={'/'} component={Home}/>
+                  <Route path="/" component={Home}/>
+                  {/*<PrivateRoute path={'/'} component={}/>*/}
             </Switch>
   );
 }
