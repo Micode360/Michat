@@ -10,7 +10,7 @@ const App = () => {
 
   
   return (
-            <Switch>282d33
+            <Switch>
                   <Route exact path="/signIn" component={SignIn}/>
                   <Route path="/signUp" component={SignUp}/>
                   <Route path="/" component={Home}/>

@@ -9,28 +9,46 @@ import { signUpAction } from './store/action/authAction'
 const SignUp = () => {
     const history = useHistory();
     const [state, dispatch] = useReducer(authReducer, {});
-    const [emailError, setEmailError] = useState("");
-    const [passwordError, setPasswordError] = useState("");
+
 
     const submitMachine = (e) => {
         e.preventDefault();
         const [email, password] = e.target.elements;
 
-        if(email.value === ""){
-            setEmailError("Fill up your email");
-            return;
-        }else if(password.value === ""){
-            setPasswordError("Fill up your password");
-            return;
-        }else{
-                signUpAction({ email: email.value, password: password.value}, dispatch)
- 
-                //history.push('/')
-            }
+        let emailVal = document.querySelector("#e-error");
+        let passwordVal = document.querySelector("#p-error");
+
+        if(validate()){
+            signUpAction({ email: email.value, password: password.value})
+            //history.push('/');
+        }
+
+
+           function validate() {
+                if(email.value === ""){
+                    emailVal.style.display = 'block';
+                }else {
+                    emailVal.style.display = 'none';
+                }
+                
+                if(password.value === ""){
+                    passwordVal.style.display = 'block';
+                }else{
+                    passwordVal.style.display = 'none';
+                }
+
+                if(email.value !== "" && password.value !== ""){
+                    return true;
+                }else {
+                    return false;
+                }
+           }
             
-    
+            
+
 
     }
+
     return (
         <>
             <div className="sign-mn-cont">
@@ -54,7 +72,7 @@ const SignUp = () => {
                         />
 
                         <Form.Text className="text-muted mt-2">
-                            <p className="mb-0">{ emailError }</p>
+                        <small className="error mb-0" id="e-error">Fill up your email <i className="fas fa-exclamation-circle"></i></small>
                         </Form.Text>
                     </Form.Group>
 
@@ -68,7 +86,7 @@ const SignUp = () => {
                         />
 
                         <Form.Text className="text-muted mt-2">
-                            <p className="mb-0">{ passwordError }</p>
+                        <small className="error mb-0" id="p-error">Fill up your password <i className="fas fa-exclamation-circle"></i></small>
                         </Form.Text>
                     </Form.Group>
 

@@ -10,6 +10,14 @@ const authSchema = new Schema ({
         type: String,
         required: true 
     },
+    tokenId: {
+        type: String,
+        required: true 
+    },
+    verification: {
+        type: Boolean,
+        required: true 
+    },
 },{
     timestamps:true,
 });
