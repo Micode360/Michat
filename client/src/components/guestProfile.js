@@ -13,6 +13,7 @@ const GuestProfile = () => {
             <h2>Aime Sanders</h2>
             <p>She's Here</p>
 
+            <button className="user_btn">User</button>
 
             <div className="_gue_description">
                 <h4>Username</h4>

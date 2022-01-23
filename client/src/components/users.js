@@ -27,10 +27,10 @@ const Users = () => {
                             <p>I am cool and Awesome</p>
                         </div>
                     </div>
-
-
-
+                    
             </div>
+
+
         </div>
     );
 

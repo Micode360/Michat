@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { loadUser } from "../store/action/userState"
 import { useHistory } from "react-router-dom"
 import prof from "../img/miracle.png"
@@ -8,6 +8,8 @@ import RecentMessages from "./recentMessage"
 // import Chat from "./chat"
 import Post from "./post"
 import Users from "./users"
+import FriendsComp from "./friendsComp"
+import Main_darshboard from "./mainDarshboard"
 // import sunset from "../img/sunset.png"
 
 
@@ -58,7 +60,7 @@ const Home = () => {
 
                             <div className="chat-nav">
                                 <div className="chat-nav-opt">
-                                    <i class="fas fa-user-friends"></i>
+                                    <i className="fas fa-user-friends"></i>
                                 </div>
                             </div>
 
@@ -66,12 +68,30 @@ const Home = () => {
 
                     </div>
 
-                    {
-                        true ?
-                            <RecentMessages />
-                            :
-                            ''
-                    }
+
+                    <div className="c-col-nth-2">
+
+                        <div className="search-case">
+                            <div className="mi-search">
+                                <input type="text" placeholder="Search" />
+                                <button><i className="fas fa-search"></i></button>
+                            </div>
+                        </div>
+
+
+                        <div className="chat-output">
+                            {
+                                false ?
+                                    <RecentMessages />
+                                    :
+                                    <FriendsComp/>
+                            }
+
+                        </div>
+
+                    </div>
+
+
 
 
                 </div>
@@ -82,7 +102,7 @@ const Home = () => {
                         true ?
                             <Post />
                             :
-                            ''
+                            <Main_darshboard/>
                     }
 
                 </div>
@@ -91,7 +111,7 @@ const Home = () => {
                 <div className="c-col-3">
 
                     {
-                        false ?
+                        true ?
                             <GuestProfile />
                             :
                             <Users />

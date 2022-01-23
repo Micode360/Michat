@@ -757,4 +757,37 @@ label:focus,
   cursor: pointer;
 }
 
+.user_btn {
+  padding: 0.5rem 1.5rem;
+  outline: none;
+  background: #f04c4d;
+  border-radius: 4px;
+  color: #ffffff;
+  outline: none;
+  border: none;
+}
+
+
+.user_btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.356);
+}
+
+
+
+/*Friends UI Updates */
+.frnds-container .title {
+  font-size: 1.2rem;
+  font-weight:400;
+}
+
+.frnds {
+  border:none !important;
+  /* border: 1px solid rgb(56, 51, 51); */
+  background-color: #111620;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.356);
+  border-radius: 4px;
+  margin-bottom:1rem;
+}
+
 
