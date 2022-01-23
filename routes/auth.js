@@ -49,10 +49,10 @@ router.post('/signUp', async (req, res) => {
           // .catch(e => console.log(e.response, "error"))
 
           // sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-          sgMail.setApiKey('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')
+          sgMail.setApiKey(process.env.SENDGRID_API_KEY)
           const msg = {
-            to: "abayemiracle@gmail.com", // Change to your recipient
-            from: 'micode360@outlook.com', // Change to your verified sender
+            to: process.env.toMail, // Change to your recipient
+            from: process.env.fromMail, // Change to your verified sender
             subject: 'Sending with SendGrid is Fun',
             text: 'and easy to do anywhere, even with Node.js',
             html: reusable.verifyTemp(),
