@@ -246,13 +246,6 @@ function verifyTemp() {
 
 const mailTransporter = async (subject,toMail,body) => {
 
-    // let transporter = nodemailer.createTransport(sgTransport({
-
-    //   auth: {
-    //     api_key:'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'
-    //   }
-    // }));
-
 
       let transporter = nodemailer.createTransport({
           host: 'smtp.sendgrid.net',
@@ -260,13 +253,13 @@ const mailTransporter = async (subject,toMail,body) => {
           secure: true,
           auth: {
             user: 'apikey',
-            pass: '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',
+            pass: '',
           },
         });
   
   
     let info = await transporter.sendMail({
-      from: `micode360@outlook.com`,
+      from: ``,
       to: toMail,
       subject: `${subject}`,
       html: `<p>${body.message}</p>`,

@@ -11,7 +11,6 @@ const sgMail = require('@sendgrid/mail');
 
 
 
-
 router.post('/signUp', async (req, res) => {
   console.log(req.body, 'body');
 

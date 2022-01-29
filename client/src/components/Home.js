@@ -20,6 +20,7 @@ import Main_darshboard from "./mainDarshboard"
 const Home = () => {
     let history = useHistory();
     const [user, setUser] = useState({});
+    const [thirdCol, setThirdCol] = useState(false);
 
 
 
@@ -111,7 +112,7 @@ const Home = () => {
                 <div className="c-col-3">
 
                     {
-                        true ?
+                        thirdCol ?
                             <GuestProfile />
                             :
                             <Users />

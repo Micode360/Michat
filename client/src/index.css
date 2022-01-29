@@ -601,6 +601,14 @@ label:focus,
   background-size: cover;
 }
 
+.user_close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  cursor: pointer;
+}
+
 .col-nth-option {
   display: flex;
   flex-direction: column;
