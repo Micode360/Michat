@@ -275,6 +275,7 @@ label:focus,
   border-radius: 6px;
   width: 3rem;
   height: 3rem;
+  cursor: pointer;
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.356);
 }
 
@@ -285,12 +286,21 @@ label:focus,
 
 
 .chat-nav {
-  margin:1.3rem 0;
+  margin:1.3rem 0 0rem 0;
 }
 
 .chat-nav-opt {
-  padding: 1rem 0;
-  margin-bottom:1.3rem;
+  padding: 0.2rem 0;
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content:center;
+}
+
+.chat-nav-opt p {
+  margin-bottom:0;
+  font-weight: lighter;
+  font-size:12px;
 }
 
 
@@ -715,17 +725,20 @@ label:focus,
   border-radius: 50%;
   background-position: center center;
   background-size: cover;
+  cursor: pointer;
 }
 
 .users_description h4 {
   font-size: 0.9rem;
   margin-bottom:0;
+  cursor: pointer;
 }
 
 .users_description p {
   font-size: 0.9rem;
   margin-bottom:0;
   color: #b19b9b;
+  cursor: pointer;
 }
 
 
@@ -768,11 +781,13 @@ label:focus,
 .user_btn {
   padding: 0.5rem 1.5rem;
   outline: none;
+  font-size: 1rem;
   background: #f04c4d;
   border-radius: 4px;
   color: #ffffff;
   outline: none;
   border: none;
+  margin-bottom:1rem;
 }
 
 
@@ -784,7 +799,7 @@ label:focus,
 
 
 /*Friends UI Updates */
-.frnds-container .title {
+.user-nth-container .title {
   font-size: 1.2rem;
   font-weight:400;
 }
@@ -796,6 +811,45 @@ label:focus,
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.356);
   border-radius: 4px;
   margin-bottom:1rem;
+} 
+
+
+/* Darshboard */
+
+.darshboard_container, .d_com, .darshboard_container .d_frame {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+.darshboard_container .d_frame{
+    width: 60%;
+}
+
+.darshboard_container .d_frame img{
+  width: 60%;
+}
+
+.d_com {
+  margin-top: 0.9rem;
+}
+
+.d_com h2 {
+  font-weight: lighter;
+  margin-bottom:1rem;
+}
+
+.d_com p {
+  font-weight: lighter;
+  color: #b19b9b;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+
+.power_off {
+  position: absolute;
+  bottom: 40px;
+}
 

@@ -4,7 +4,7 @@ import pImage from "../img/profile_image.png"
 
 
 
-const Users = () => {
+const Users = ({ setThirdCol }) => {
 
 
     return (
@@ -19,7 +19,7 @@ const Users = () => {
 
             <div className="users_res_container">
 
-                    <div className="user">
+                    <div className="user" onClick={()=> setThirdCol(true)}>
                         <div className="users_img_cont"><div className="user_img" style={{ backgroundImage: `url(${pImage})` }}></div></div>
  
                         <div className="users_description">
