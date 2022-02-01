@@ -253,13 +253,13 @@ const mailTransporter = async (subject,toMail,body) => {
           secure: true,
           auth: {
             user: 'apikey',
-            pass: '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',
+            pass: '',
           },
         });
   
   
     let info = await transporter.sendMail({
-      from: `micode360@outlook.com`,
+      from: ``,
       to: toMail,
       subject: `${subject}`,
       html: `<p>${body.message}</p>`,

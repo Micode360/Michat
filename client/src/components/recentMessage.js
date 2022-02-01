@@ -4,39 +4,23 @@ import river from "../img/945955.jpg"
 
 
 
-const RecentMessages = () => {
+const RecentMessages = ({ setSecondCol }) => {
 
     return (
-        <>
-            <div className="c-col-nth-2">
+        <div className="users_res_container user-nth-container">
 
-                <div className="search-case">
-                    <div className="mi-search">
-                        <input type="text" placeholder="Search" />
-                        <button><i className="fas fa-search"></i></button>
-                    </div>
+            <h4 className="title">Messages</h4>
+
+            <div className="chat-box" onClick={()=>setSecondCol(true)}>
+                <div className="chat-img"></div>
+                <div className="chat-description">
+                    <h4>Paul Banters</h4>
+                    <p>How are you? What is up with you?</p>
+                    <span>12:43AM</span>
                 </div>
-
-
-                <div className="chat-output">
-
-                    <div className="chat-box">
-                        <div className="chat-img"></div>
-                        <div className="chat-description">
-                            <h4>Aime Sanders</h4>
-                            <p>How are you? What is up with you?</p>
-                            <span>12:43AM</span>
-                        </div>
-                        <div className="no-of-messages">5</div>
-                    </div>
-
-
-
-
-                </div>
-
+                <div className="no-of-messages">5</div>
             </div>
-        </>
+        </div>
     );
 }
 

@@ -24,7 +24,7 @@ const Chat = () => {
             </div>
 
             <div className="_cht_showroom">
-
+                
                 <div className="_mi_row">
                     <div className="_mi_cht">
                         It is a long established fact that a reader will be distracted

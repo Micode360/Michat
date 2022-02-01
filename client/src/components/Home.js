@@ -1,14 +1,14 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { loadUser } from "../store/action/userState"
 import { useHistory } from "react-router-dom"
 import prof from "../img/miracle.png"
 import Logo from "../img/logo.png"
 import GuestProfile from "./guestProfile"
 import RecentMessages from "./recentMessage"
-// import Chat from "./chat"
 import Post from "./post"
 import Users from "./users"
-// import sunset from "../img/sunset.png"
+import FriendsComp from "./friendsComp"
+import Main_darshboard from "./mainDarshboard"
 
 
 
@@ -18,6 +18,10 @@ import Users from "./users"
 const Home = () => {
     let history = useHistory();
     const [user, setUser] = useState({});
+    const [firstCol, setFirstCol] = useState(false);
+    const [secondCol, setSecondCol] = useState(false);
+    const [thirdCol, setThirdCol] = useState(false);
+    
 
 
 
@@ -39,39 +43,78 @@ const Home = () => {
 
     return (
         <>
-            {/*                 <Col className="contain-a">
+            {/* <Col className="contain-a">
                         <h4>MiLogo</h4>                
                         <Button  onClick={()=>logout()}>Log Out</Button>
-                </Col>*/}
+                </Col>
+            */}
+            
             <div className="chat-container">
                 <div className="c-col-1">
                     <div className="c-col-nth-1">
 
                         <div className="col-nth-option">
-                            <div className="logo-img">
+                            <div className="logo-img" onClick={()=>setSecondCol(false)}>
                                 <img src={Logo} alt="logo" />
                             </div>
 
-                            <div className="chat-prof-img">
+                            <div className="chat-prof-img" onClick={()=> setThirdCol(true)}>
                                 <img src={prof} alt="prof image" />
                             </div>
-
+                            
                             <div className="chat-nav">
-                                <div className="chat-nav-opt">
-                                    <i class="fas fa-user-friends"></i>
+                                <div className="chat-nav-opt" onClick={()=>setFirstCol(false)}>
+                                    <i className="fas fa-user-friends"></i>
+                                    <p>Friends</p>
                                 </div>
                             </div>
+
+                            
+                            <div className="chat-nav">
+                                <div className="chat-nav-opt" onClick={()=>setFirstCol(true)}>
+                                    <i className="fas fa-envelope"></i>
+                                    <p>Messages</p>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div className="chat-nav power_off" onClick={()=>''}>
+                                <div className="chat-nav-opt" onClick={()=>setFirstCol(true)}>
+                                <i className="fas fa-power-off"></i>
+                                    <p>Log Out</p>
+                                </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <div className="c-col-nth-2">
+
+                        <div className="search-case">
+                            <div className="mi-search">
+                                <input type="text" placeholder="Search" />
+                                <button><i className="fas fa-search"></i></button>
+                            </div>
+                        </div>
+
+
+                        <div className="chat-output">
+                            {
+                                firstCol === true ?
+                                    <RecentMessages setSecondCol={setSecondCol}/>
+                                    :
+                                    <FriendsComp setThirdCol={setThirdCol}/>
+                            }
 
                         </div>
 
                     </div>
 
-                    {
-                        true ?
-                            <RecentMessages />
-                            :
-                            ''
-                    }
+
 
 
                 </div>
@@ -79,22 +122,21 @@ const Home = () => {
 
                 <div className="c-col-2">
                     {
-                        true ?
+                        secondCol === true ?
                             <Post />
                             :
-                            ''
+                            <Main_darshboard/>
                     }
-
                 </div>
 
 
                 <div className="c-col-3">
 
                     {
-                        false ?
-                            <GuestProfile />
+                        thirdCol === true?
+                            <GuestProfile setThirdCol={setThirdCol}/>
                             :
-                            <Users />
+                            <Users setThirdCol={setThirdCol}/>
                     }
 
                 </div>
