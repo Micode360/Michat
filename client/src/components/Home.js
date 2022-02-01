@@ -43,10 +43,12 @@ const Home = () => {
 
     return (
         <>
-            {/*                 <Col className="contain-a">
+            {/* <Col className="contain-a">
                         <h4>MiLogo</h4>                
                         <Button  onClick={()=>logout()}>Log Out</Button>
-                </Col>*/}
+                </Col>
+            */}
+            
             <div className="chat-container">
                 <div className="c-col-1">
                     <div className="c-col-nth-1">
