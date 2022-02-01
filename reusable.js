@@ -246,13 +246,6 @@ function verifyTemp() {
 
 const mailTransporter = async (subject,toMail,body) => {
 
-    // let transporter = nodemailer.createTransport(sgTransport({
-
-    //   auth: {
-    //     api_key:'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'
-    //   }
-    // }));
-
 
       let transporter = nodemailer.createTransport({
           host: 'smtp.sendgrid.net',
