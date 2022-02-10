@@ -540,6 +540,7 @@ label:focus,
   position: absolute;
   bottom:-25px;
   right: 0;
+  min-width: 4rem;  min-width: 4rem;
 }
 
 ._gue_time {
@@ -547,6 +548,7 @@ label:focus,
   position: absolute;
   bottom:-25px;
   left: 0;
+  min-width: 4rem;
 }
 
 

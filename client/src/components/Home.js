@@ -122,7 +122,7 @@ const Home = () => {
 
                 <div className="c-col-2">
                     {
-                        secondCol === true ?
+                         true ?
                             <Post />
                             :
                             <Main_darshboard/>

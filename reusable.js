@@ -234,7 +234,6 @@ function verifyTemp() {
         </td>
       </tr>
     </table>
-
   </body>
   </html>
   
@@ -247,15 +246,15 @@ function verifyTemp() {
 const mailTransporter = async (subject,toMail,body) => {
 
 
-      let transporter = nodemailer.createTransport({
-          host: 'smtp.sendgrid.net',
-          port: 465,//25587,
-          secure: true,
-          auth: {
-            user: 'apikey',
-            pass: '',
-          },
-        });
+      let transporter = nodemailer.createTransport({
+          host: 'smtp.sendgrid.net',
+          port: 465,//25587,
+          secure: true,
+          auth: {
+            user: 'apikey',
+            pass: '',
+          },
+        });
   
   
     let info = await transporter.sendMail({
@@ -265,7 +264,7 @@ const mailTransporter = async (subject,toMail,body) => {
       html: `<p>${body.message}</p>`,
     });
 
-    //console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    //console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   
     return await (info.messageId);
   }
@@ -278,4 +277,3 @@ const mailTransporter = async (subject,toMail,body) => {
 exports.verifyTemp = verifyTemp;
 exports.tknGenerate = tknGenerate;
 exports.mailTransporter = mailTransporter;
-
