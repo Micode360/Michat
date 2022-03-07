@@ -9,7 +9,7 @@ const base = async () => {
         useUnifiedTopology: true,
       });
   
-      console.log('MongoDB Connection established...');
+      console.log('Mi Base is Alive...');
     } catch (err) {
       console.error(err.message);
       process.exit(1);
