@@ -4,10 +4,12 @@ const cors = require('cors');
 const base = require('./config/base');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+
+
 base();
 
 require('dotenv').config()
-//app.use(cors())
+
 
 app.use(cors({
     credentials: true,
@@ -19,8 +21,9 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json({ extended: false }));
 app.use(cookieParser());
 
+
 //routes
-app.use('/auth', require('./routes/auth'));
+app.use('/chat/auth', require('./routes/auth'));
 
 
 app.get('/cookie', (req,res) => {
@@ -47,6 +50,13 @@ if (process.env.NODE_ENV === 'production') {
 
 
 let port = process.env.PORT || 3000;
-app.listen(port, () =>{
-    console.log(`listening on port ${port}`)
-});
+
+//Powering up the server
+const server = app.listen(port, () => console.log(`your port is running at ${port}`));
+
+
+process.on("unhandledRejection", (error, promise) => {
+    console.log(`Process Error: ${error}`)
+
+    server.close(()=> process.exit(1));
+})
