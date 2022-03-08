@@ -1,17 +1,18 @@
-const randomToken = require('random-token');
-var sgTransport = require('nodemailer-sendgrid-transport');
+const randomToken = require("random-token");
+var sgTransport = require("nodemailer-sendgrid-transport");
 const nodemailer = require("nodemailer");
 
 const tknGenerate = (number) => {
-    randomToken.create('abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
-    let generatedToken = randomToken(number);
-    return generatedToken;
-}
+  randomToken.create(
+    "abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+  );
+  let generatedToken = randomToken(number);
+  return generatedToken;
+};
 
 /* Template */
 
 function verifyTemp() {
-
   let year = new Date().getFullYear();
   let footer = document.querySelector("#text-footer1");
   footer.innerHTML = `Michat, ${year}`;
@@ -240,39 +241,28 @@ function verifyTemp() {
   `;
 }
 
+const mailTransporter = async (subject, toMail, body) => {
+  let transporter = nodemailer.createTransport({
+    host: "smtp.sendgrid.net",
+    port: 465, //25587,
+    secure: true,
+    auth: {
+      user: "apikey",
+      pass: "",
+    },
+  });
 
+  let info = await transporter.sendMail({
+    from: ``,
+    to: toMail,
+    subject: `${subject}`,
+    html: `<p>${body.message}</p>`,
+  });
 
+  //console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 
-const mailTransporter = async (subject,toMail,body) => {
-
-
-      let transporter = nodemailer.createTransport({
-          host: 'smtp.sendgrid.net',
-          port: 465,//25587,
-          secure: true,
-          auth: {
-            user: 'apikey',
-            pass: '',
-          },
-        });
-  
-  
-    let info = await transporter.sendMail({
-      from: ``,
-      to: toMail,
-      subject: `${subject}`,
-      html: `<p>${body.message}</p>`,
-    });
-
-    //console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-  
-    return await (info.messageId);
-  }
-
-
-
-
-
+  return await info.messageId;
+};
 
 exports.verifyTemp = verifyTemp;
 exports.tknGenerate = tknGenerate;
