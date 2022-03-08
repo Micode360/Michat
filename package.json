@@ -21,7 +21,10 @@
     "mongoose": "^6.0.12",
     "nodemailer": "^6.7.2",
     "nodemailer-sendgrid-transport": "^0.2.0",
-    "random-token": "^0.0.8"
+    "random-token": "^0.0.8",
+    "uuid": "^8.3.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "prettier": "2.5.1"
+  }
 }
