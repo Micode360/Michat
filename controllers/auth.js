@@ -8,7 +8,7 @@ const mailer = require("../utils/mailer");
 const uuid = require("uuid");
 
 exports.SignUp = async (req, res, next) => {
-  const { firstname, lastname, email, password } = req.body,
+  const { firstName, lastName, email, password } = req.body,
     username = "none",
     confirmationToken = uuid.v4();
 
@@ -18,8 +18,8 @@ exports.SignUp = async (req, res, next) => {
     try {
       const user = await User.create({
         username,
-        firstname,
-        lastname,
+        firstName,
+        lastName,
         email,
         password,
         confirmPassword: false,
@@ -28,7 +28,7 @@ exports.SignUp = async (req, res, next) => {
 
       sendToken(user, 201, res);
 
-      // const message = `
+      // const welcomeMessage = `
       // <h1>Welcome to Mi Chat</h1>
       // <p>Hello ${user.firstname} ${user.lastname},</p>
       // <p>
@@ -40,11 +40,11 @@ exports.SignUp = async (req, res, next) => {
       // <p>Founder of Mi-Chat ( AKA Mi-World )</p>
       // `;
 
-      const message = `
+      const confirmationMessage = `
             <h1 style="color:#111620">Confirm Your Account</h1>
-            <p>Hello ${user.firstname} ${user.lastname},</p>
+            <p>Hello ${user.firstName} ${user.lastName},</p>
             <p>
-                one more step to go. Click the button below to verify your account.
+                One more step to go. Click the button below to verify your account.
             </p>
             <a href="http://localhost:3000/confirm/${confirmationToken}" style="display:block; background-color:#111620; padding:1rem 2rem; text-decoration:none; border-radius:4px; color: #ffffff; width:fit-content;" clicktracking=off>Confirm Email</a>
             <br/>
@@ -53,10 +53,11 @@ exports.SignUp = async (req, res, next) => {
             `;
 
       try {
-        await mailer({
+        await mailer(
+          "Michat: Confirm Your Account",{
           to: user.email,
           subject: "Confirm Your Account",
-          text: message,
+          text: confirmationMessage
         });
       } catch (error) {
         return next(Error(500, "Unable to send email"));
@@ -65,7 +66,7 @@ exports.SignUp = async (req, res, next) => {
       next(error);
     }
   } else if (user.email === email)
-    return res.json({ message: "Email is already taken" });
+    return res.status(400).json({ message: "Email is already taken" });
 };
 
 exports.confirmAccount = async (req, res, next) => {
@@ -99,7 +100,7 @@ exports.SignIn = async (req, res, next) => {
         const { email, password } = req.body;
 
         if(!email || !password) { 
-            return next(Error(400, "please provide email and password"));
+            return next(res.status(400).json({ message: "Please provide email and password" }));
         }
     
         try { 
@@ -107,13 +108,13 @@ exports.SignIn = async (req, res, next) => {
             const user = await User.findOne({ email }).select("+password");
     
             if(!user) {
-                return next(Error(401, "invalid credentials"));
+                return next(res.status(400).json({ message: "Invalid email or password" }));
             }
     
             const isMatch = await user.compareToMatchPasswords(password);
     
             if(!isMatch) {
-                return next(Error(401, "invalid credentials"));
+                return next(res.status(400).json({ message: "Invalid email or password" }));
             }
     
             sendToken(user, 201, res)
@@ -125,6 +126,78 @@ exports.SignIn = async (req, res, next) => {
         })
     }
 };
+
+
+exports.forgotPassword = async (req, res, next) => {
+   const { email } = req.body;
+
+  try {
+      const user = await User.findOne({ email });
+
+      if(!user) return next(res.status(400).json({ message: "Invalid email" }));
+
+      const resetToken = user.getResetPaswwordToken();
+
+      await user.save();
+
+      const resetUrl = `http://localhost:8000/passwordreset/${resetToken}`;
+  
+      const message = `
+      <h1>You have requested a password reset</h1>
+      <p>Please go to this link to reset your password</p>
+      <a href="${resetUrl}" clicktracking=off>${resetUrl}</a>
+      `;
+
+
+      try {
+          await mailer(
+            "Michat: Reset your Password",{
+              to: user.email,
+              subject: "Password Reset Request",
+              text: message
+          })
+
+          res.status(202).json({success: true, data: "Email Sent"});
+      }catch(error) {
+          user.resetPasswordToken = undefined;
+          user.resetPasswordExpire = undefined;
+
+          await user.save();
+          return next(new ErrorResponse("Email could not be sent", 500))
+      }
+
+  }catch(error) {
+      next(error);
+  }
+
+}
+
+// exports.resetPassword = async (req, res, next) => {
+//   const resetPasswordToken = crypto.createHash('sha256').update(req.params.resetToken).digest("hex");
+
+//   try {
+//       const user = await User.findOne({
+//           resetPasswordToken,
+//           resetPasswordExpire: { $gt: Date.now() }
+//       })
+
+
+//       if(!user) return next(new ErrorResponse("Invalid Reset Token"), 400);
+
+//       user.password = req.body.password;
+//       user.resetPasswordToken = undefined;
+//       user.resetPasswordExpire = undefined;
+
+//       await user.save();
+
+//       res.status(201).json({
+//           success: true,
+//           data: "Password Reset Success"
+//       })
+//   } catch (error) {
+//       next(error);
+//   }
+// }
 
 const sendToken = (user, statusCode, res) => {
   const token = user.getSignedInToken();

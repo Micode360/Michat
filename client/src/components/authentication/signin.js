@@ -1,13 +1,18 @@
-import { useReducer, useState } from "react";
-import { Link } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
-import authReducer from "../../store/reducer/authReducer";
-import { signInAction } from "../../store/action/authAction";
-//import { useHistory } from 'react-router-dom'
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import { Form, Button, Alert } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { ThunkSignIn } from "../../store/reducers/authReducer";
 
 const SignIn = () => {
-  // const history = useHistory();
-  const [state, dispatch] = useReducer(authReducer, []);
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const [show, setShow] = useState(false);
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { message } = useSelector((state) => state.messageResponse);
+
+  if (isLoggedIn === true) return <Redirect to="/" />;
 
   const submitMachine = (e) => {
     e.preventDefault();
@@ -16,11 +21,20 @@ const SignIn = () => {
     let passwordVal = document.querySelector("#p-error");
 
     if (validate()) {
-      signInAction({
-        type: "SIGNIN_SUCCESS",
-        state: { email: email.value, password: password.value },
-      });
-      //history.push('/');
+      dispatch(
+        ThunkSignIn({
+          email: email.value,
+          password: password.value,
+        })
+      )
+        .unwrap()
+        .then((data) => {
+          history.push("/");
+          window.location.reload();
+        })
+        .catch((err) => {
+          setShow(true);
+        });
     }
 
     function validate() {
@@ -53,6 +67,18 @@ const SignIn = () => {
                 <h3>Sign In</h3>
               </Form.Label>
             </Form.Group>
+
+            {show ? (
+              <Alert
+                variant="danger"
+                onClose={() => setShow(false)}
+                dismissible
+              >
+                <p className="form-alert-p">{message}</p>
+              </Alert>
+            ) : (
+              ""
+            )}
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
@@ -87,7 +113,7 @@ const SignIn = () => {
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Text className="text-muted">
-                <Link to="/Sign Up">Forgot password</Link>
+                <Link to="/forgotpassword">Forgot password</Link>
               </Form.Text>
             </Form.Group>
 

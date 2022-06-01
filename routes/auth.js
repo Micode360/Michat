@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { SignUp, SignIn, confirmAccount } = require("../controllers/auth");
+const { SignUp, SignIn, confirmAccount, forgotPassword } = require("../controllers/auth");
 // const authModel = require('../models/auth.model');
 // const bcrypt = require('bcryptjs');
 // const jwt = require('jsonwebtoken');
@@ -10,5 +10,6 @@ const { SignUp, SignIn, confirmAccount } = require("../controllers/auth");
 router.post("/signup", SignUp);
 router.post("/confirm/account/:confirmationToken", confirmAccount);
 router.post("/signin", SignIn);
+router.post("/forgotpassword", forgotPassword);
 
 module.exports = router;

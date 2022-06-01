@@ -1,6 +1,6 @@
-import sunset from "../img/sunset.png";
-import earth from "../img/19618.jpg";
-import river from "../img/945955.jpg";
+// import sunset from "../img/sunset.png";
+// import earth from "../img/19618.jpg";
+// import river from "../img/945955.jpg";
 
 const RecentMessages = ({ setSecondCol }) => {
   return (
