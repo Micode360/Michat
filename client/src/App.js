@@ -10,12 +10,12 @@ import Home from "./components/Home";
 const App = () => {
   return (
     <Switch>
-      <Route exact path="/signIn" component={SignIn} />
-      <Route path="/signUp" component={SignUp} />
-      <Route path="/forgotpassword" component={ForgotPassword} />
-      <Route path="/newpassword" component={NewPassword} />
-      <Route path="/" component={Home} />
-      {/*<PrivateRoute path={'/'} component={}/>*/}
+      <Route exact path={["/", "/home"]} component={Home} />
+      <Route exact path="/signin" component={SignIn} />
+      <Route exact path="/signup" component={SignUp} />
+      <Route exact path="/forgotpassword" component={ForgotPassword} />
+      <Route exact path="/newpassword" component={NewPassword} />
+      <Route exact path="*" render={()=>"<h1> 404. Page Not Found</h1>"} />
     </Switch>
   );
 };

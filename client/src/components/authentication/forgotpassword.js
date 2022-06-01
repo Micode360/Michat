@@ -1,8 +1,51 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { ThunkForgotPassword } from "../../store/reducers/authReducer";
 
 const ForgotPassword = () => {
-  const submitMachine = () => {};
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [show, setShow] = useState(false);
+  const { message } = useSelector((state) => state.messageResponse);
+
+  const submitMachine = (e) => {
+    e.preventDefault();
+    const [email] = e.target.elements;
+    let emailVal = document.querySelector("#e-error");
+
+    if (validate()) {
+      dispatch(
+        ThunkForgotPassword({
+          email: email.value,
+        })
+      )
+        .unwrap()
+        .then(() => {
+          history.push("/newpassword");
+          window.location.reload();
+        })
+        .catch(() => {
+          setShow(true);
+        });
+    }
+
+    function validate() {
+      if (email.value === "") {
+        emailVal.style.display = "block";
+      } else {
+        emailVal.style.display = "none";
+      }
+
+      if (email.value !== "") {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  };
 
   return (
     <>
@@ -14,6 +57,18 @@ const ForgotPassword = () => {
                 <h3>Forgot Password</h3>
               </Form.Label>
             </Form.Group>
+
+            {show ? (
+              <Alert
+                variant="danger"
+                onClose={() => setShow(false)}
+                dismissible
+              >
+                <p className="form-alert-p">{message}</p>
+              </Alert>
+            ) : (
+              ""
+            )}
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
@@ -36,7 +91,7 @@ const ForgotPassword = () => {
 
             <Form.Group className="mb-3 mt-3" controlId="formBasicPassword">
               <Form.Text className="text-white">
-                Do you remember now return back to?{" "}
+                Do you remember your password? got to{" "}
                 <Link to="/Signin">Sign In</Link>
               </Form.Text>
             </Form.Group>

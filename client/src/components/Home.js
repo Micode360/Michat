@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { loadUser } from "../store/action/userState";
-import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+//import { loadUser } from "../store/action/userState";
+import { Redirect } from "react-router-dom";
 import prof from "../img/miracle.png";
 import Logo from "../img/logo.png";
 import GuestProfile from "./guestProfile";
@@ -8,35 +9,27 @@ import RecentMessages from "./recentMessage";
 import Post from "./post";
 import Users from "./users";
 import FriendsComp from "./friendsComp";
-import Main_darshboard from "./mainDarshboard";
+import MainDarshboard from "./mainDarshboard";
+import { logOut } from "../store/reducers/authReducer";
 
 const Home = () => {
-  let history = useHistory();
-  const [user, setUser] = useState({});
+  const dispatch = useDispatch();
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
   const [firstCol, setFirstCol] = useState(false);
   const [secondCol, setSecondCol] = useState(false);
   const [thirdCol, setThirdCol] = useState(false);
 
   useEffect(() => {
-    if (loadUser() === undefined) return;
-    setUser({
-      email: loadUser().email,
-    });
-  }, [setUser]);
+    
+  }, []);
 
-  const logout = () => {
-    localStorage.removeItem("payload");
-    return history.push("/signIn");
-  };
+
+
+  if(!isLoggedIn) return <Redirect to="/signin"/>;
 
   return (
     <>
-      {/* <Col className="contain-a">
-                        <h4>MiLogo</h4>                
-                        <Button  onClick={()=>logout()}>Log Out</Button>
-                </Col>
-            */}
-
       <div className="chat-container">
         <div className="c-col-1">
           <div className="c-col-nth-1">
@@ -46,7 +39,7 @@ const Home = () => {
               </div>
 
               <div className="chat-prof-img" onClick={() => setThirdCol(true)}>
-                <img src={prof} alt="prof image" />
+                <img src={prof} alt="profile" />
               </div>
 
               <div className="chat-nav">
@@ -67,8 +60,11 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="chat-nav power_off" onClick={() => ""}>
-              <div className="chat-nav-opt" onClick={() => setFirstCol(true)}>
+            <div className="chat-nav power_off">
+              <div className="chat-nav-opt" onClick={() =>{
+                dispatch(logOut())
+                window.location.reload();
+              }}>
                 <i className="fas fa-power-off"></i>
                 <p>Log Out</p>
               </div>
@@ -95,7 +91,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="c-col-2">{true ? <Post /> : <Main_darshboard />}</div>
+        <div className="c-col-2">{false ? <Post /> : <MainDarshboard />}</div>
 
         <div className="c-col-3">
           {thirdCol === true ? (

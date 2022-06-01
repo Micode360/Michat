@@ -1,27 +1,59 @@
-import { useReducer, useState } from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Form, Button, Row } from "react-bootstrap";
-import authReducer from "../../store/reducer/authReducer";
+import { Form, Button, Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import { signUpAction } from "../../store/action/authAction";
+import { ThunkSignUp } from "../../store/reducers/authReducer";
 
 const SignUp = () => {
   const history = useHistory();
-  const [state, dispatch] = useReducer(authReducer, {});
+  const dispatch = useDispatch();
+  const [show, setShow] = useState(false);
+  const { message } = useSelector((state) => state.messageResponse);
 
   const submitMachine = (e) => {
     e.preventDefault();
-    const [email, password] = e.target.elements;
+    const [firstName, lastName, email, password, confirmPassword] =
+      e.target.elements;
 
+    let firstNameVal = document.querySelector("#f-error");
+    let lastNameVal = document.querySelector("#l-error");
     let emailVal = document.querySelector("#e-error");
     let passwordVal = document.querySelector("#p-error");
+    let confirmPasswordVal = document.querySelector("#cp-error");
 
     if (validate()) {
-      signUpAction({ email: email.value, password: password.value });
-      //history.push('/');
+      dispatch(
+        ThunkSignUp({
+          firstName: firstName.value,
+          lastName: lastName.value,
+          email: email.value,
+          password: password.value,
+        })
+      )
+        .unwrap()
+        .then((data) => {
+          history.push("/");
+          window.location.reload();
+        })
+        .catch((err) => {
+          setShow(true);
+        });
     }
 
     function validate() {
+      if (firstName.value === "") {
+        firstNameVal.style.display = "block";
+      } else {
+        firstNameVal.style.display = "none";
+      }
+
+      if (lastName.value === "") {
+        lastNameVal.style.display = "block";
+      } else {
+        lastNameVal.style.display = "none";
+      }
+
       if (email.value === "") {
         emailVal.style.display = "block";
       } else {
@@ -34,7 +66,23 @@ const SignUp = () => {
         passwordVal.style.display = "none";
       }
 
-      if (email.value !== "" && password.value !== "") {
+      if (
+        confirmPassword.value === "" ||
+        confirmPassword.value !== password.value
+      ) {
+        confirmPasswordVal.style.display = "block";
+      } else {
+        confirmPasswordVal.style.display = "none";
+      }
+
+      if (
+        firstName.value !== "" &&
+        lastName.value !== "" &&
+        email.value !== "" &&
+        password.value !== "" &&
+        confirmPassword.value !== "" &&
+        confirmPassword.value === password.value
+      ) {
         return true;
       } else {
         return false;
@@ -47,14 +95,26 @@ const SignUp = () => {
       <div className="sign-mn-cont">
         <div className="sign-child-cont sn-2 p-2">
           <Form onSubmit={submitMachine} className="auth-form">
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3" controlId="SignUp">
               <Form.Label>
                 <h3>Sign Up</h3>
               </Form.Label>
             </Form.Group>
 
-            <Row className="row">
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+            {show ? (
+              <Alert
+                variant="danger"
+                onClose={() => setShow(false)}
+                dismissible
+              >
+                <p className="form-alert-p">{message}</p>
+              </Alert>
+            ) : (
+              ""
+            )}
+
+            <div className="colm">
+              <Form.Group className="mb-3" controlId="firstname">
                 <Form.Label>First Name</Form.Label>
 
                 <Form.Control
@@ -64,14 +124,14 @@ const SignUp = () => {
                 />
 
                 <Form.Text className="text-muted mt-2">
-                  <small className="error mb-0" id="e-error">
-                    Fill up your First Name{" "}
+                  <small className="error mb-0" id="f-error">
+                    Fill up your first Name{" "}
                     <i className="fas fa-exclamation-circle"></i>
                   </small>
                 </Form.Text>
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3" controlId="lastname">
                 <Form.Label>Last Name</Form.Label>
 
                 <Form.Control
@@ -81,15 +141,15 @@ const SignUp = () => {
                 />
 
                 <Form.Text className="text-muted mt-2">
-                  <small className="error mb-0" id="e-error">
+                  <small className="error mb-0" id="l-error">
                     Fill up your Last Name{" "}
                     <i className="fas fa-exclamation-circle"></i>
                   </small>
                 </Form.Text>
               </Form.Group>
-            </Row>
+            </div>
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3" controlId="Email">
               <Form.Label>Email address</Form.Label>
 
               <Form.Control
@@ -106,7 +166,7 @@ const SignUp = () => {
               </Form.Text>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3" controlId="Password">
               <Form.Label>Password</Form.Label>
 
               <Form.Control
@@ -123,16 +183,28 @@ const SignUp = () => {
               </Form.Text>
             </Form.Group>
 
-            <Form.Group
-              className="mb-3"
-              controlId="formBasicPassword"
-            ></Form.Group>
+            <Form.Group className="mb-3" controlId="conFirmPassword">
+              <Form.Label>Confirm Password</Form.Label>
+
+              <Form.Control
+                className="sn-input"
+                type="password"
+                placeholder="Confirm password"
+              />
+
+              <Form.Text className="text-muted mt-2">
+                <small className="error mb-0" id="cp-error">
+                  Confirm your password{" "}
+                  <i className="fas fa-exclamation-circle"></i>
+                </small>
+              </Form.Text>
+            </Form.Group>
 
             <Button className="sn-btn" variant="primary" type="submit">
               Submit
             </Button>
 
-            <Form.Group className="mb-3 mt-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3 mt-3" controlId="link">
               <Form.Text className="text-white">
                 Have have an account? <Link to="/SignIn">Sign In</Link>
               </Form.Text>

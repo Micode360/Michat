@@ -1,6 +1,6 @@
 import Logo from "../img/logo.png";
 
-const Main_darshboard = () => {
+const MainDarshboard = () => {
   return (
     <div className="darshboard_container">
       <div className="d_frame">
@@ -15,4 +15,4 @@ const Main_darshboard = () => {
   );
 };
 
-export default Main_darshboard;
+export default MainDarshboard;
