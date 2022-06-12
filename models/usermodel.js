@@ -10,6 +10,22 @@ const UserSchema = new Schema(
       type: String,
       required: false,
     },
+    profilePic: {
+      type: String,
+      required: false,
+    },
+    status: {
+      type: String,
+      required: false,
+    },
+    location: {
+      type: String,
+      required: false,
+    },
+    media: {
+      type: Array,
+      required: false,
+    },
     firstName: {
       type: String,
       required: [true, "First Name required"],
@@ -68,7 +84,7 @@ UserSchema.methods.getSignedInToken = function () {
 };
 
 
-UserSchema.methods.getResetPaswwordToken = function () {
+UserSchema.methods.getResetPasswordToken = function () {
   const resetToken = crypto.randomBytes(20).toString("hex");
 
   this.resetPasswordToken = crypto

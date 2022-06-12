@@ -33,7 +33,7 @@ const SignUp = () => {
       )
         .unwrap()
         .then((data) => {
-          history.push("/");
+          history.push("/confirmaccount/pending");
           window.location.reload();
         })
         .catch((err) => {

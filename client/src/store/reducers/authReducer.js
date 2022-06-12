@@ -43,6 +43,23 @@ export const ThunkSignIn = createAsyncThunk(
   }
 );
 
+export const ThunkConfirmAccount= createAsyncThunk(
+  "auth/confirm",
+  async (token, thunkAPI) => {
+
+    try {
+       const response = await authService.confirmAccount(token);
+       console.log(response, "resonse")
+       if(response.success === true) {
+       return thunkAPI.dispatch(setMessage({success: response.success, confirmed: response.data}));
+      }
+    } catch (err) {
+      thunkAPI.dispatch(setMessage(err.response.data.message?err.response.data.message:'Account Confirmation Error'));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+
 export const ThunkForgotPassword = createAsyncThunk(
   "auth/forgotpassword",
   async ({ email }, thunkAPI) => {
@@ -52,7 +69,26 @@ export const ThunkForgotPassword = createAsyncThunk(
         email,
       });
       console.log(response, "response");
-       return { user: response.data };
+      return thunkAPI.dispatch(setMessage({success: response.success, response: response.data}));
+    } catch (err) {
+      thunkAPI.dispatch(setMessage(err.response.data.message?err.response.data.message:'Server Error'));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+
+
+export const ThunkResetPassword = createAsyncThunk(
+  "auth/resetpassword",
+  async ({token, password}, thunkAPI) => {
+   
+    try {
+      const response = await authService.resetPassword({
+        token,
+        password
+      });
+      console.log(response, "response");
+      return thunkAPI.dispatch(setMessage({success: response.success, response: response.data}));
     } catch (err) {
       thunkAPI.dispatch(setMessage(err.response.data.message?err.response.data.message:'Server Error'));
       return thunkAPI.rejectWithValue();
@@ -63,6 +99,7 @@ export const ThunkForgotPassword = createAsyncThunk(
 export const logOut = createAsyncThunk("auth/logout", async () => {
   await authService.logOut();
 });
+
 
 
 

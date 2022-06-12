@@ -21,9 +21,22 @@ const signIn = (user) => {
   })
 }
 
+const confirmAccount = (token) => {
+  return axios.post("http://localhost:8000/chat/auth/confirm/account/" + token)
+  .then(response =>{
+    return response.data;
+  })
+}
 
 const forgotPassword = (email) => {
   return axios.post("http://localhost:8000/chat/auth/forgotpassword", email)
+  .then(response =>{
+    return response.data;
+  })
+}
+
+const resetPassword = ({token, password}) => {
+  return axios.post("http://localhost:8000/chat/auth/resetpassword/" + token, { password })
   .then(response =>{
     return response.data;
   })
@@ -37,7 +50,9 @@ const authService = {
   signUp,
   logOut,
   signIn,
-  forgotPassword
+  forgotPassword,
+  confirmAccount,
+  resetPassword
 };
 
 export default authService;
