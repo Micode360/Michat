@@ -1,8 +1,5 @@
-const router = require("express").Router();
 const User = require("../models/usermodel");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const jwtSecret = require("../config/keys").jwtSecret;
+const crypto = require("crypto");
 const Error = require("../utils/error");
 const mailer = require("../utils/mailer");
 const uuid = require("uuid");
@@ -46,7 +43,7 @@ exports.SignUp = async (req, res, next) => {
             <p>
                 One more step to go. Click the button below to verify your account.
             </p>
-            <a href="http://localhost:3000/confirm/${confirmationToken}" style="display:block; background-color:#111620; padding:1rem 2rem; text-decoration:none; border-radius:4px; color: #ffffff; width:fit-content;" clicktracking=off>Confirm Email</a>
+            <a href="http://localhost:3000/confirmaccount/${confirmationToken}" style="display:block; background-color:#111620; padding:1rem 2rem; text-decoration:none; border-radius:4px; color: #ffffff; width:fit-content;" clicktracking=off>Confirm Email</a>
             <br/>
             <p>Yours Truly,<p>
             <p><strong>Michat Team</strong></p>
@@ -136,16 +133,16 @@ exports.forgotPassword = async (req, res, next) => {
 
       if(!user) return next(res.status(400).json({ message: "Invalid email" }));
 
-      const resetToken = user.getResetPaswwordToken();
+      const resetToken = user.getResetPasswordToken();
 
       await user.save();
 
-      const resetUrl = `http://localhost:8000/passwordreset/${resetToken}`;
+      const resetUrl = `http://localhost:3000/resetpassword/${resetToken}`;
   
       const message = `
       <h1>You have requested a password reset</h1>
       <p>Please go to this link to reset your password</p>
-      <a href="${resetUrl}" clicktracking=off>${resetUrl}</a>
+      <a href="${resetUrl}" style="display:block; background-color:#111620; padding:1rem 2rem; text-decoration:none; border-radius:4px; color: #ffffff; width:fit-content;" clicktracking=off>Reset password</a>
       `;
 
 
@@ -157,13 +154,13 @@ exports.forgotPassword = async (req, res, next) => {
               text: message
           })
 
-          res.status(202).json({success: true, data: "Email Sent"});
+          res.status(202).json({success: true, data: "An email has been sent"});
       }catch(error) {
           user.resetPasswordToken = undefined;
           user.resetPasswordExpire = undefined;
 
           await user.save();
-          return next(new ErrorResponse("Email could not be sent", 500))
+          return next(res.status(400).json({ message: "Email could not be sent." }))
       }
 
   }catch(error) {
@@ -172,32 +169,32 @@ exports.forgotPassword = async (req, res, next) => {
 
 }
 
-// exports.resetPassword = async (req, res, next) => {
-//   const resetPasswordToken = crypto.createHash('sha256').update(req.params.resetToken).digest("hex");
+exports.resetPassword = async (req, res, next) => {
+  const resetPasswordToken = crypto.createHash('sha256').update(req.params.resetToken).digest("hex");
 
-//   try {
-//       const user = await User.findOne({
-//           resetPasswordToken,
-//           resetPasswordExpire: { $gt: Date.now() }
-//       })
+  try {
+      const user = await User.findOne({
+          resetPasswordToken,
+          resetPasswordExpire: { $gt: Date.now() }
+      })
 
 
-//       if(!user) return next(new ErrorResponse("Invalid Reset Token"), 400);
+      if(!user) return next(res.status(400).json({ message: "Invalid reset token" }));
 
-//       user.password = req.body.password;
-//       user.resetPasswordToken = undefined;
-//       user.resetPasswordExpire = undefined;
+      user.password = req.body.password;
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpire = undefined;
 
-//       await user.save();
+      await user.save();
 
-//       res.status(201).json({
-//           success: true,
-//           data: "Password Reset Success"
-//       })
-//   } catch (error) {
-//       next(error);
-//   }
-// }
+      res.status(201).json({
+          success: true,
+          data: "Password Reset Success"
+      })
+  } catch (error) {
+      next(error);
+  }
+}
 
 const sendToken = (user, statusCode, res) => {
   const token = user.getSignedInToken();

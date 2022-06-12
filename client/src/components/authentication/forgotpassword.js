@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Alert } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { ThunkForgotPassword } from "../../store/reducers/authReducer";
 
+
+
 const ForgotPassword = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [show, setShow] = useState(false);
   const { message } = useSelector((state) => state.messageResponse);
 
   const submitMachine = (e) => {
@@ -22,15 +23,8 @@ const ForgotPassword = () => {
           email: email.value,
         })
       )
-        .unwrap()
-        .then(() => {
-          history.push("/newpassword");
-          window.location.reload();
-        })
-        .catch(() => {
-          setShow(true);
-        });
     }
+
 
     function validate() {
       if (email.value === "") {
@@ -51,24 +45,23 @@ const ForgotPassword = () => {
     <>
       <div className="sign-mn-cont">
         <div className="sign-child-cont sn-2 p-2">
-          <Form onSubmit={submitMachine} className="auth-form">
+         {
+          message.success === true?
+          (
+            <div className="message_frame">
+              <i className="fa fa-check-circle" aria-hidden="true"></i>
+              <h1>{!message.response?'':message.response}</h1>
+              <p>Please check your mail for the link to reset your password.</p>
+            </div>
+          )
+          :
+          (
+            <Form onSubmit={submitMachine} className="auth-form">
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>
                 <h3>Forgot Password</h3>
               </Form.Label>
             </Form.Group>
-
-            {show ? (
-              <Alert
-                variant="danger"
-                onClose={() => setShow(false)}
-                dismissible
-              >
-                <p className="form-alert-p">{message}</p>
-              </Alert>
-            ) : (
-              ""
-            )}
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
@@ -96,6 +89,8 @@ const ForgotPassword = () => {
               </Form.Text>
             </Form.Group>
           </Form>
+          )
+         }
         </div>
       </div>
     </>

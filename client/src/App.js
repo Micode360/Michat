@@ -4,8 +4,11 @@ import { Switch, Route } from "react-router-dom";
 import SignIn from "./components/authentication/signin";
 import SignUp from "./components/authentication/signup";
 import ForgotPassword from "./components/authentication/forgotpassword";
-import NewPassword from "./components/authentication/newpassword";
+import ResetPassword from "./components/authentication/resetpassword";
+import ConfirmAccount from "./components/authentication/confirmaccount";
 import Home from "./components/Home";
+
+
 
 const App = () => {
   return (
@@ -14,8 +17,9 @@ const App = () => {
       <Route exact path="/signin" component={SignIn} />
       <Route exact path="/signup" component={SignUp} />
       <Route exact path="/forgotpassword" component={ForgotPassword} />
-      <Route exact path="/newpassword" component={NewPassword} />
-      <Route exact path="*" render={()=>"<h1> 404. Page Not Found</h1>"} />
+      <Route exact path="/resetpassword/:params" component={ResetPassword} />
+      <Route exact path="/confirmaccount/:params" component={ConfirmAccount} />
+      <Route exact path="*" render={()=>(<h1 className="p04_error"> 404. Page Not Found</h1>)} />
     </Switch>
   );
 };
