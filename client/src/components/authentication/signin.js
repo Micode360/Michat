@@ -123,7 +123,7 @@ const SignIn = () => {
 
             <Form.Group className="mb-3 mt-3" controlId="formBasicPassword">
               <Form.Text className="text-white">
-                Don't have an account? <Link to="/SignUp">Sign Up</Link>
+                Don't have an account? <Link to="/Signup">Sign Up</Link>
               </Form.Text>
             </Form.Group>
           </Form>

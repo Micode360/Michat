@@ -148,7 +148,7 @@ exports.forgotPassword = async (req, res, next) => {
 
       try {
           await mailer(
-            "Michat: Reset your Password",{
+            "Michat",{
               to: user.email,
               subject: "Password Reset Request",
               text: message

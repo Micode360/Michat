@@ -17,7 +17,7 @@ const ResetPassword = () => {
     const url = window.location.pathname;
     const params = url.split('/')[2];
       setParamsToken(params)
-  }, [ThunkResetPassword, setParamsToken])
+  }, [setParamsToken])
 
 
 
@@ -125,6 +125,14 @@ const ResetPassword = () => {
               <Button className="sn-btn" variant="primary" type="submit">
                 Submit
               </Button>
+
+
+              <Form.Group className="mb-3 mt-3" controlId="formBasicPassword">
+              <Form.Text className="text-white">
+                Remembered your password? <Link to="/Signin">Sign In</Link>
+              </Form.Text>
+            </Form.Group>
+
             </Form>
             )
           }

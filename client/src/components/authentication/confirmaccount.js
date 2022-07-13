@@ -17,7 +17,7 @@ const ConfirmAccount = () => {
     if(params.split("-").length === 5) {
         dispatch(ThunkConfirmAccount(params))
     }
-  }, [ThunkConfirmAccount, dispatch])
+  }, [dispatch])
 
 
   if(message.success === true) {

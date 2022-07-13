@@ -7,6 +7,126 @@ body {
   background: rgb(26, 29, 36) !important;
 }
 
+
+/*
+   -------------------------
+    Global Styles. Need to edit some of the inbuilt styles plus remove
+    boostrap which was used at the auth section of this site.
+   ----------------------------
+*/
+
+
+.f1 {
+  font-size: 0.9rem;
+}
+
+
+.mflex {
+  display: flex;
+}
+
+.mflex-col {
+    flex-direction: column;
+}
+
+.mjustify-center {
+  justify-content: center;
+}
+
+.mjustify-start {
+  align-items: flex-start !important;
+}
+
+.malign-center {
+  align-items: center;
+}
+
+.mjustify-between {
+  justify-content: space-between;
+}
+
+.p1 {
+  padding: 0.2rem 0.4rem !important;
+}
+
+
+.px1 {
+    padding: 0 1rem;
+}
+
+.pt1 {
+    padding-top: 1rem;
+}
+
+.pb1 {
+    padding-bottom: 1rem;
+}
+
+.pl1 {
+    padding-left: 1rem;
+}
+
+.pr1 {
+    padding-right:1rem;
+}
+
+
+
+
+.mx1 {
+  margin: 0 1rem;
+}
+
+.mt1 {
+  margin-top: 1rem;
+}
+
+.mb1 {
+  margin-bottom: 1rem;
+}
+
+.ml1 {
+  margin-left: 1rem;
+}
+
+.mr1 {
+  margin-right:1rem;
+}
+
+.mr0 {
+  margin-right:0.5rem;
+}
+
+.bleft {
+  border-left:1px solid #302d2d;
+}
+
+.bright {
+  border-right:1px solid #302d2d;
+}
+
+
+.btop {
+  border-top:1px solid #302d2d;
+}
+
+
+.bbottom {
+  border-bottom:1px solid #302d2d;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+/*
+   -------------------------
+    Global Styles. Need to edit some of the inbuilt styles plus remove
+    boostrap which was used at the auth section of this site.
+   ----------------------------
+*/
+
+
 textarea:hover,
 input:hover,
 textarea:active,
@@ -199,7 +319,7 @@ label:focus,
 /*Home chat Page*/
 .chat-container {
   display: grid;
-  grid-template-columns: 1fr 1.8fr 1fr;
+  grid-template-columns: 1fr 2.3fr 1fr;
   position: fixed;
   top: 0;
   left: 0;
@@ -876,6 +996,72 @@ label:focus,
   text-align: center;
   color: #ffffff;
 }
+
+/*Modal*/
+
+.modal_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background-color: #201b11ee; */
+  background: #ee09787e;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ff6a008e, #3f0320);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ff6a005e, #460424e1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+
+.m_modal {
+  background-color: #111620;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.356);
+  z-index: 20;
+  min-width: 50vw;
+  color: #ffffff;
+}
+
+.m_modal button{
+    border: none;
+    border-radius: .3rem;
+    padding: .4rem 1.5rem;
+    background-color: #0a2f7a;
+    color: #ffffff;
+}
+
+.m_modal button:hover {
+  background-color: #09358d;
+  transform: translateY(-0.5px);
+  transition: 0.1s;
+  color: #fbf8cc;
+  box-shadow: 0px 0px 0px 2px #fbf8cc65 !important;
+}
+
+.m_modal button:active {
+  transform: scale(0.95);
+}
+
+.close {
+  cursor: pointer;
+}
+
+
+/*
+for color upgrade
+background: #ee0979;  
+background: -webkit-linear-gradient(to right, #ff6a00, #ee0979); 
+background: linear-gradient(to right, #ff6a00, #ee0979); 
+
+*/
+
+@media (max-width:600px) {
+  .m_modal {
+    min-width: 80vw;
+  }
+  
+}
+
+
 
 
 
