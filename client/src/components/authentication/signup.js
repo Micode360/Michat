@@ -206,7 +206,7 @@ const SignUp = () => {
 
             <Form.Group className="mb-3 mt-3" controlId="link">
               <Form.Text className="text-white">
-                Have have an account? <Link to="/SignIn">Sign In</Link>
+                Have have an account? <Link to="/Signin">Sign In</Link>
               </Form.Text>
             </Form.Group>
           </Form>

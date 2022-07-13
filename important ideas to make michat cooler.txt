@@ -10,3 +10,10 @@ private route
 put request, patch request and so on
 HTTP status
 backend principles
+
+emojies: high five; correct - thumbs up; make sense;
+
+glowy tags: when i click on the input tag, it glows
+
+
+glow text: https://codepen.io/jurastef/pen/YzeqgYP

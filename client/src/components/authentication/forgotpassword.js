@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Form, Button, Alert } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { ThunkForgotPassword } from "../../store/reducers/authReducer";
 
 
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
   const { message } = useSelector((state) => state.messageResponse);
 
   const submitMachine = (e) => {
