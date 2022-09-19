@@ -4,7 +4,7 @@ import "../css/user.darshboard.css"
 import testimonial from "../../img/testimonial.jpg"
 
 
-const PostInput = () => {
+const PostInput = ({ setModalStatus }) => {
     const [userChatMessage, setUserChatMessage] = useState("");
 
     const messageOnChange = (e) => {
@@ -16,8 +16,20 @@ const PostInput = () => {
         console.log(userChatMessage, "user");
     };
 
+    const closeFunc = (e) => {
+
+        if(
+            e.target.className.includes('modal_container')
+            || e.target.className.includes('mclose')
+            || e.target.className.includes('close')
+            ) {
+             
+                setModalStatus(false);
+        }else return;
+    }
+
     return (
-        <div className="modal_container mflex mjustify-center malign-center">
+        <div className="modal_container mflex mjustify-center malign-center" onClick={(e)=>closeFunc(e)}>
             <div className="m_modal pt1 pb1">
 
                 <div className="mflex mjustify-between px1">
@@ -28,7 +40,7 @@ const PostInput = () => {
 
 
                     <div className="close">
-                        <i className="fa fa-times" aria-hidden="true"></i>
+                        <i className="fa fa-times mclose" aria-hidden="true"></i>
                     </div>
                 </div>
 

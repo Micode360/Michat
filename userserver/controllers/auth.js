@@ -80,7 +80,7 @@ exports.confirmAccount = async (req, res, next) => {
       res.status(201).json({
         success: true,
         data: "Your account is confirmed.",
-      });
+      }); 
     } else {
       res.status(201).json({
         success: true,

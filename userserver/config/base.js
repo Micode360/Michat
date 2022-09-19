@@ -8,7 +8,7 @@ const base = async () => {
       useUnifiedTopology: true,
     });
 
-    console.log("Mi Base is Alive...");
+    console.log("User_Base activated...");
   } catch (err) {
     console.error(err.message);
     process.exit(1);

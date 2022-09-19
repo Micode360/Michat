@@ -7,7 +7,7 @@ const RecentMessages = ({ setSecondCol }) => {
     <div className="users_res_container user-nth-container">
       <h4 className="title">Messages</h4>
 
-      <div className="chat-box" onClick={() => setSecondCol(true)}>
+      <div className="chat-box" onClick={() => setSecondCol('messages')}>
         <div className="chat-img"></div>
         <div className="chat-description">
           <h4>Paul Banters</h4>

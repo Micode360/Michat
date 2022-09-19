@@ -1,7 +1,6 @@
 import "./css/user.darshboard.css"
-import profile from "../img/testimonial.jpg"
 import GeneralPosts from "./attatchments/generalPosts";
-const UserDarshboard = () => {
+const UserDarshboard = ({ setModalStatus }) => {
   let tags = [
     'Sports',
     'Hero',
@@ -21,14 +20,11 @@ const UserDarshboard = () => {
       <div className="users_nav mflex mjustify-between msticky">
         <h4>Posts</h4>
 
-        <div className="msearch_container">
-          <div className="mi-search dsearch ml1">
-            <input type="text" placeholder="Search tags" />
-            <button>
-              <i className="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
+ 
+        <button className="user_post_button" onClick={()=>setModalStatus(true)}>
+          What's trending?
+        </button>
+   
       </div>
 
       <div className="posts_tags mflex malign-center mb1 msticky">

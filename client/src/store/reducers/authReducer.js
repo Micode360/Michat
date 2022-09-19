@@ -35,6 +35,7 @@ export const ThunkSignIn = createAsyncThunk(
         email,
         password,
       });
+
        return { user: response.data };
     } catch (err) {
       thunkAPI.dispatch(setMessage(err.response.data.message?err.response.data.message:'Sign up failed'));
@@ -68,7 +69,6 @@ export const ThunkForgotPassword = createAsyncThunk(
       const response = await authService.forgotPassword({
         email,
       });
-      console.log(response, "response");
       return thunkAPI.dispatch(setMessage({success: response.success, response: response.data}));
     } catch (err) {
       thunkAPI.dispatch(setMessage(err.response.data.message?err.response.data.message:'Server Error'));
