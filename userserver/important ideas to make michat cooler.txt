@@ -1,0 +1,23 @@
+if a smiley is happy the color of your website shows a happy tone.
+
+yarn prettier --write . to use prettier
+
+study:
+
+headers or authoriztion headers in node.js
+error handling in node.js
+private route
+put request, patch request and so on
+HTTP status
+backend principles
+
+emojies: high five; correct - thumbs up; make sense;
+
+glowy tags: when i click on the input tag, it glows
+
+
+glow text: https://codepen.io/jurastef/pen/YzeqgYP
+
+
+ git config --global user.email "you@example.com"
+git config --global user.name "Your Name"

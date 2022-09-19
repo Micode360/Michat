@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Form, Button, Alert } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import {  ThunkConfirmAccount } from "../../store/reducers/authReducer";

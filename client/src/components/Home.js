@@ -18,8 +18,9 @@ const Home = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   const [firstCol, setFirstCol] = useState(false);
-  const [secondCol, setSecondCol] = useState(false);
+  const [secondCol, setSecondCol] = useState('posts');
   const [thirdCol, setThirdCol] = useState(false);
+  const [modalStatus, setModalStatus] = useState(false);
 
   useEffect(() => {
     
@@ -35,7 +36,7 @@ const Home = () => {
         <div className="c-col-1">
           <div className="c-col-nth-1">
             <div className="col-nth-option">
-              <div className="logo-img" onClick={() => setSecondCol(false)}>
+              <div className="logo-img" onClick={() => setSecondCol('posts')}>
                 <img src={Logo} alt="logo" />
               </div>
 
@@ -59,7 +60,15 @@ const Home = () => {
                   <p>Messages</p>
                 </div>
               </div>
+
+              <div className="chat-nav">
+                <div className="chat-nav-opt" onClick={() => setFirstCol(true)}>
+                  <i className="fas fa-envelope"></i>
+                  <p>Notifications</p>
+                </div>
+              </div>
             </div>
+         
 
             <div className="chat-nav power_off">
               <div className="chat-nav-opt" onClick={() =>{
@@ -92,7 +101,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="c-col-2">{true ? <UserDarshboard/> :'greetings'? <MainDarshboard />: <Post />}</div>
+        <div className="c-col-2">{secondCol === 'posts' ? <UserDarshboard setModalStatus={setModalStatus}/> :secondCol === 'greetings'? <MainDarshboard />:secondCol === 'messages'?<Post />:<MainDarshboard />}</div>
 
         <div className="c-col-3">
           {thirdCol === true ? (
@@ -102,7 +111,7 @@ const Home = () => {
           )}
         </div>
       </div>
-      <PostInput/>
+      {modalStatus?<PostInput setModalStatus={setModalStatus}/>:''}
     </>
   );
 };

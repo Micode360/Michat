@@ -42,6 +42,7 @@
     margin-right: 1rem;
 }
 
+
 .posts_frame img {
     width: 100%;
 }
@@ -108,14 +109,125 @@
   .icn_opt:hover {
     opacity: 1;
     transition: 0.1s;
-    color: #fbf8cc;
+    color: #a3c4f3;
     transform: translateY(-0.5px);
-    box-shadow: 0px 0px 0px 2px #fbf8cc65;
+    box-shadow: 0px 0px 0px 2px #a3c4f365;
+    -webkit-box-shadow: 0px 0px 0px 2px #a3c4f365;
+    -moz-box-shadow: 0px 0px 0px 2px #a3c4f365;
   }
 
   .icn_opt:active {
     transform: scale(0.95);
   }
 
+  .user_post_button {
+    background: #f04c4d;
+    padding: 0 2rem;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.356);
+  }
+
   
 
+  /*Comments*/
+
+  .comment_prof {
+    width: 3rem;
+    height: 3rem;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: cover !important;
+    border-radius: 5px;
+    margin-right: 1rem;
+  }
+
+  .mi-put {
+    background-color: #0d1018;
+    padding: 0.3rem 0.5rem;
+    border-radius: 4rem;
+    width: 90%;
+  }
+  
+  .mi-put button,
+  .mi-put input {
+    background-color: #0d1018;
+    outline: none !important;
+    border: none !important;
+    color: #ffffff !important;
+    width: 80%;
+  }
+  
+  .mi-put input {
+    padding: 0 0.6rem;
+    font-size: 0.85rem;
+  }
+  
+  .gen_posts_comment {
+    width: 80%;
+  }
+
+  
+._gue_icn {
+  color: #887575;
+  position: absolute;
+  bottom: -25px;
+  right: 0;
+  min-width: 4rem;
+}
+
+
+.chatAltIcon {
+  width: 1.53rem;
+  margin-right: 0.3rem;
+}
+
+.thumbUpIcon {
+  width: 1.53rem; 
+  margin-right: 0.3rem;
+} 
+
+.shareIcon {
+  width: 1.3rem; 
+  margin-right: 0.3rem; 
+}
+
+.userIcon {
+  width: 1.53rem; 
+  margin-right: 0.3rem;
+}
+
+
+
+
+@media (max-width:500px) {
+  .posts_frame {
+    width: 90%;
+}
+
+.chatAltIcon, .thumbUpIcon, .shareIcon, .userIcon {
+  width: 1rem;
+}
+
+.post-opt {
+  flex-direction: column;
+}
+
+.post-opt div {
+  justify-content: space-between;
+}
+
+.post-opt div:nth-child(1) {
+  margin-bottom: 0.2rem;
+}
+
+.post-opt div:nth-child(2) {
+  justify-content: flex-end;
+  margin-right: 0.5rem;
+}
+
+
+
+
+}

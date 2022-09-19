@@ -1,11 +1,9 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const base = require("./config/base");
 const cookieParser = require("cookie-parser");
 const path = require("path");
 
-base();
 
 require("dotenv").config();
 
@@ -23,6 +21,8 @@ app.use(cookieParser());
 
 //routes
 app.use("/chat/auth", require("./routes/auth"));
+app.use("/chat/private", require("./routes/private"));
+app.use("/darsh", require("./routes/user"));
 
 app.get("/cookie", (req, res) => {
   // res.setHeader('Set-Cookie', 'Tylan=true')
@@ -36,18 +36,20 @@ app.get("/readcookie", (req, res) => {
   res.send({ cookie: req.cookies });
 });
 
+
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+app.use(express.static("../client/build"));
   app.get("/*", (req, res) =>
     res.sendFile(path.resolve(__dirname + "/client/build/index.html"))
   );
 }
 
+
 let port = process.env.PORT || 3000;
 
 //Powering up the server
 const server = app.listen(port, () =>
-  console.log(`your port is running at ${port}`)
+  console.log(`Main_Server:${port}`)
 );
 
 process.on("unhandledRejection", (error, promise) => {
