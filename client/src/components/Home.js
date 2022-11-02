@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import prof from "../img/miracle.png";
@@ -12,8 +12,10 @@ import MainDarshboard from "./mainDarshboard";
 import UserDarshboard from "./user_darshboard";
 import { logOut } from "../store/reducers/authReducer";
 import PostInput from "./attatchments/postInput";
+import { io } from "socket.io-client"
 
 const Home = () => {
+  const socket = useRef();
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state) => state.auth);
 
@@ -21,11 +23,22 @@ const Home = () => {
   const [secondCol, setSecondCol] = useState('posts');
   const [thirdCol, setThirdCol] = useState(false);
   const [modalStatus, setModalStatus] = useState(false);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    
+        socket.current = io("http://localhost:8000");
+
+        socket.current.on("connection", ()=>{
+          console.log("connected to server");
+        })
   }, []);
 
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(search,"search")
+    socket.current.emit("message", search)
+  }
 
 
   if(!isLoggedIn) return <Redirect to="/signin"/>;
@@ -83,12 +96,12 @@ const Home = () => {
 
           <div className="c-col-nth-2">
             <div className="search-case">
-              <div className="mi-search">
-                <input type="text" placeholder="Search" />
+              <form className="mi-search" onSubmit={handleSubmit}>
+                <input type="text" onChange={(e)=> setSearch(e.target.value)} placeholder="Search" />
                 <button>
                   <i className="fas fa-search"></i>
                 </button>
-              </div>
+              </form>
             </div>
 
             <div className="chat-output">
