@@ -4,19 +4,15 @@ const { Server } = require("socket.io");
 const cors = require("cors");
 const base = require("./config/base");
 const cookieParser = require("cookie-parser");
-const AWS = require('aws-sdk');
-
+const cloudinary = require("cloudinary");
+const socket = require("./utils/socket");
 
 
 
 const app = express();
 const httpServer = createServer(app);
-const io = new Server(httpServer, { /* options */ });
-
-io.on("connection", (socket) => {
-  cosole.log(socket,"New user connected");
-  // ...
-});
+const io = socket.ioSetUp(httpServer);
+socket.connection(io);
 
 base(); // Instantiating database
 
@@ -32,31 +28,28 @@ app.use(
 );
 
 
-
-//  AWS Configuration
-
-//Configuring s3 database
-const s3 = new AWS.S3({
-    accessKeyId: process.env.AWS_ID,
-    secretAccessKey: process.env.AWS_SECRET
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
 });
-
-
-//passing s3 as middleware
-app.use((req , res , next ) => {
-  req.s3 = s3;
-  next();
-});
-
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json({ extended: false }));
 app.use(cookieParser());
+const socketIoMiddleware = (req, res, next) => {
+  req.io = io;
+  next();
+}
 
 //routes
 app.use("/chat/auth", require("./routes/auth"));
 app.use("/chat/private", require("./routes/private"));
 app.use("/darsh", require("./routes/user"));
+app.use("/api/v1/hello", socketIoMiddleware, (req, res) => {
+  req.io.emit("message", `Hello ${req.originalUrl}`);
+  res.send("from socket Api")
+});
 
 
 app.get("/cookie", (req, res) => {
@@ -71,9 +64,6 @@ app.get("/readcookie", (req, res) => {
   res.send({ cookie: req.cookies });
 });
 
-app.get('/aws',(req,res)=> {
-  res.send(`<img src="https://michat.s3.amazonaws.com/d81aa919-9a0f-4700-8f1d-0692072306c2.png"/>`)
-})
 
 let port = process.env.PORT || 3000;
 
@@ -87,3 +77,5 @@ process.on("unhandledRejection", (error, promise) => {
 
   server.close(() => process.exit(1));
 });
+
+
