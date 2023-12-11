@@ -1,2 +1,3 @@
 # Michat
+## A chat Application
 
